@@ -77,7 +77,7 @@ CONVERTER_CLASSES = {
 CONVERTES_TYPES = ['cardinal', 'ordinal', 'ordinal_num', 'year', 'currency']
 
 
-def num2words_fc(number, ordinal=False, lang='en', to='cardinal', **kwargs):
+def num2words(number, ordinal=False, lang='en', to='cardinal', **kwargs):
     # We try the full language first
     if lang not in CONVERTER_CLASSES:
         # ... and then try only the first 2 letters
