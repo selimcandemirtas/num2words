@@ -16,6 +16,7 @@
 # MA 02110-1301 USA
 
 from __future__ import unicode_literals
+import re
 
 from . import (lang_AM, lang_AR, lang_CZ, lang_DE, lang_DK, lang_EN,
                lang_EN_IN, lang_EO, lang_ES, lang_ES_CO, lang_ES_NI,
@@ -95,4 +96,12 @@ def num2words(number, ordinal=False, lang='en', to='cardinal', **kwargs):
     if to not in CONVERTES_TYPES:
         raise NotImplementedError()
 
-    return getattr(converter, 'to_{}'.format(to))(number, **kwargs)
+    #return getattr(converter, 'to_{}'.format(to))(number, **kwargs)
+
+    num2word = getattr(converter, 'to_{}'.format(to))(number, **kwargs)
+
+    num2word = re.sub('^\s+', '', num2word)     # remove spaces at the start
+    num2word = re.sub('\s+\Z', '', num2word)    # remove spaces at the end
+    num2word = re.sub(' +', ' ', num2word)
+
+    return num2word
